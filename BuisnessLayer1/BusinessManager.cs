@@ -24,20 +24,24 @@ namespace BuisnessLayer1
 
         public bool VerifyLogIn(string Id, string pw)
         {
-            bool LogIn;
+            bool Login;
             int id = Convert.ToInt32(Id);
-            Person person = UnitOfWork.person.Get(id);
-            if (person != null && person.Password == pw)
+            Employee employee = UnitOfWork.employee.Get(id);
+            
+            //bool LogIn;
+            //int id = Convert.ToInt32(Id);
+            //Person person = UnitOfWork.person.Get(id);
+            if (employee != null && employee.Password == pw)
             {
-                LogIn = true;
-                logIn = person;
+                Login = true;
+                logIn = employee;
             }
             else
             {
-                LogIn = false;
+                Login = false;
                 logIn = null;
             }
-            return LogIn;
+            return Login;
         }
 
         public Person GetLogIn()
@@ -106,6 +110,23 @@ namespace BuisnessLayer1
             UnitOfWork.activities.Remove(Pickedaktivity);
             UnitOfWork.Compelte();
         }
+
+        public void DeleteAlumnus(int id)
+        {
+            Alumnus PickedAlumnus = UnitOfWork.alumnus.Get(id);
+            UnitOfWork.alumnus.Remove(PickedAlumnus);
+            UnitOfWork.Compelte();
+        }
+
+        public void CreateAlumnus(Alumnus alumnus)
+        {
+            UnitOfWork.alumnus.Add(alumnus);
+            UnitOfWork.Compelte();
+        }
+
+     
+
+
 
        
         
